@@ -30,8 +30,9 @@ const initializeDbServer = async () => {
       `;
     await db.run(createTableQuery);
 
+    const PORT = process.env.PORT || 3000;
     app.listen(3000, () =>
-      console.log("Server started at http://localhost:3000")
+      console.log(`Server started at http://localhost:${PORT}`)
     );
   } catch (err) {
     console.log(err.message);
