@@ -1,0 +1,24 @@
+GET http://localhost:3000/todos
+###
+
+GET http://localhost:3000/todos/11
+###
+
+POST http://localhost:3000/todos
+Content-Type: application/json
+
+{
+  "title": "Backup files",
+  "description": "Save important documents and code to an external drive or cloud storage."
+}
+###
+
+PUT http://localhost:3000/todos/11
+Content-Type: application/json
+
+{
+    "completed": 1
+}
+###
+
+DELETE http://localhost:3000/todos/14
