@@ -1,0 +1,29 @@
+.search-form {
+    width: 100%;
+    display: flex;
+    flex-grow: 1;
+}
+
+.search-form__input[type="search"] {
+    width: 100%;
+    background-color: transparent;
+    outline: none;
+    padding: 5px 10px;
+    border: 1px solid #afafaf;
+    border-radius: 4px;
+    transition: all ease 1s;
+}
+
+.search-form__input[type="search"]::placeholder {
+    color: #afafaf;
+}
+
+.search-form__input[type="search"]:focus {
+    background-color: #f5f5f5;
+}
+
+@media (max-width: 768px) {
+    .search-form__input[type="search"] {
+        padding: 10px 20px;
+    }
+}

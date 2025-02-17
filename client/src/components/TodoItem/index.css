@@ -1,0 +1,47 @@
+.todo-item {
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+@media (max-width: 768px) {
+    .todo-item {
+        padding: 10px 0px;
+    }    
+}
+
+.todo-item__left-section {
+    display: flex;
+    align-items: center;
+    gap: 12px
+}
+
+.todo-item__checkbox-btn {
+    font-size: 1.3rem;
+
+}
+
+.todo-item__checkbox-btn,
+.todo-item__menu-btn {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+
+
+.todo-item__title {
+    text-align: left;
+}
+
+.checkbox-outline {
+    color: var(--secondary-btn);
+}
+
+.todo-item__menu-btn {
+    font-size: 1rem;
+    color: var(--secondary-btn)
+}
