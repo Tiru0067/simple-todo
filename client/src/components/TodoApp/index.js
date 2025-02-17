@@ -13,6 +13,7 @@ function TodoApp() {
   const [loading, setLoading] = useState(true);
   const [showTodoForm, setShowTodoForm] = useState(false);
   const [editingTodo, setEditingTodo] = useState(null);
+  const [searchText, setSearchText] = useState("");
 
   const url = "https://simple-todo-8fnj.onrender.com/todos";
 
@@ -99,6 +100,10 @@ function TodoApp() {
     setIsChecked(!isChecked);
   };
 
+  const filteredTodos = todos.filter((todo) =>
+    todo.title.toLowerCase().includes(searchText.toLowerCase())
+  );
+
   return (
     <div className="todo-app__wrapper">
       <main className="todo-app">
@@ -108,9 +113,11 @@ function TodoApp() {
           isChecked={isChecked}
           handleAddTodo={handleAddTodo}
           setShowTodoForm={setShowTodoForm}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
         <TodoList
-          todos={todos}
+          todos={filteredTodos}
           loading={loading}
           deleteTodo={deleteTodo}
           handleAddTodo={handleAddTodo}

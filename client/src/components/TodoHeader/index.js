@@ -9,7 +9,13 @@ import "./index.css";
 import SearchForm from "../SearchForum";
 import WindowContext from "../../context/windowContext";
 
-function TodoHeader({ toggleCheckbox, isChecked, setShowTodoForm }) {
+function TodoHeader({
+  toggleCheckbox,
+  isChecked,
+  setShowTodoForm,
+  searchText,
+  setSearchText,
+}) {
   const [showSearchBar, setShowSearchbar] = useState(false);
 
   const { width } = WindowContext();
@@ -31,7 +37,12 @@ function TodoHeader({ toggleCheckbox, isChecked, setShowTodoForm }) {
         </button>
         <div className="todo-header__right-section">
           <div className="todo-header__search-wrapper">
-            {showSearchBar && width > 768 && <SearchForm />}
+            {showSearchBar && width > 768 && (
+              <SearchForm
+                searchText={searchText}
+                setSearchText={setSearchText}
+              />
+            )}
             <button
               className="todo-header__search-btn"
               type="button"
@@ -59,7 +70,9 @@ function TodoHeader({ toggleCheckbox, isChecked, setShowTodoForm }) {
           </div>
         </div>
       </div>
-      {showSearchBar && width < 768 && <SearchForm />}
+      {showSearchBar && width < 768 && (
+        <SearchForm searchText={searchText} setSearchText={setSearchText} />
+      )}
     </header>
   );
 }
