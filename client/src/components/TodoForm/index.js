@@ -1,14 +1,27 @@
 import React from "react";
 import "./index.css";
 
-function TodoForm({ setShowTodoForm, todoText, setTodoText, handleAddTodo }) {
-  const onSave = (e) => {
+function TodoForm(props) {
+  const {
+    setShowTodoForm,
+    todoText,
+    setTodoText,
+    handleAddTodo,
+    handleEditTodo,
+    editingTodo,
+  } = props;
+
+  const handleSaveTodo = (e, text) => {
     e.preventDefault();
-    handleAddTodo(e.target.value);
+    if (editingTodo) {
+      handleEditTodo(text, editingTodo);
+    } else {
+      handleAddTodo(text);
+    }
   };
 
   return (
-    <form className="todo-form" onSubmit={onSave}>
+    <form className="todo-form" onSubmit={(e) => handleSaveTodo(e, todoText)}>
       <input
         type="text"
         className="todo-form__input"

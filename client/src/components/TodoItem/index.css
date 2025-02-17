@@ -8,7 +8,7 @@
 }
 
 .todo-item.done {
-    background-color: #eee;
+    background-color: #f9f9f9;
 }
 
 @media (max-width: 768px) {
@@ -37,10 +37,16 @@
     padding: 5px;
 }
 
-
 .todo-item__title {
     text-align: left;
+    color: #34333c;
 }
+
+.todo-item.done .todo-item__title {
+    text-decoration: line-through;
+    color: #797684;
+}
+
 
 .checkbox-outline {
     color: var(--secondary-btn);
@@ -66,5 +72,5 @@
 }
 
 .todo-item__delete-btn:hover {
-    color: var(--highlight-color);
+    color: var(--alert-color);
 }

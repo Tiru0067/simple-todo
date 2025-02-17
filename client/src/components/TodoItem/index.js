@@ -4,15 +4,29 @@ import { FaRegCircle, FaCircleCheck, FaPen, FaTrash } from "react-icons/fa6";
 
 import "./index.css";
 
-function TodoItem({ todo, deleteTodo, handleAddTodo }) {
-  const [isChecked, setIsChecked] = useState(false);
+function TodoItem({
+  todo,
+  deleteTodo,
+  setShowTodoForm,
+  setTodoText,
+  setEditingTodo,
+  handleToggleComplete,
+}) {
+  const [isChecked, setIsChecked] = useState(todo.completed === 1);
 
   const toggleCheck = () => {
     setIsChecked(!isChecked);
+    handleToggleComplete(todo.id);
   };
 
   const toggleDelete = () => {
     deleteTodo(todo.id);
+  };
+
+  const toggleEdit = () => {
+    setEditingTodo(todo.id);
+    setTodoText(todo.title);
+    setShowTodoForm(true);
   };
 
   return (
@@ -32,10 +46,18 @@ function TodoItem({ todo, deleteTodo, handleAddTodo }) {
         <p className="todo-item__title">{todo.title}</p>
       </div>
       <div className="todo-item__buttons-container">
-        <button className="todo-item__edit-btn">
+        <button
+          className="todo-item__edit-btn"
+          type="text"
+          onClick={toggleEdit}
+        >
           <FaPen />
         </button>
-        <button className="todo-item__delete-btn" onClick={toggleDelete}>
+        <button
+          className="todo-item__delete-btn"
+          type="button"
+          onClick={toggleDelete}
+        >
           <FaTrash />
         </button>
       </div>

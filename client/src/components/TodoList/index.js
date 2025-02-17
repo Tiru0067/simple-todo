@@ -15,6 +15,10 @@ function TodoList(props) {
     setShowTodoForm,
     todoText,
     setTodoText,
+    handleEditTodo,
+    editingTodo,
+    setEditingTodo,
+    handleToggleComplete,
   } = props;
 
   return (
@@ -25,6 +29,8 @@ function TodoList(props) {
           handleAddTodo={handleAddTodo}
           todoText={todoText}
           setTodoText={setTodoText}
+          editingTodo={editingTodo}
+          handleEditTodo={handleEditTodo}
         />
       )}
       <ul className="todo-list">
@@ -38,7 +44,10 @@ function TodoList(props) {
               key={todo.id}
               todo={todo}
               deleteTodo={deleteTodo}
-              handleAddTodo={handleAddTodo}
+              setShowTodoForm={setShowTodoForm}
+              setTodoText={setTodoText}
+              setEditingTodo={setEditingTodo}
+              handleToggleComplete={handleToggleComplete}
             />
           ))
         ) : (

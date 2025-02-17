@@ -11,21 +11,16 @@
 
 :root {
   /* Primary Colors */
-  --bg-color: #F4F7FC; /* Background */
+  --bg-color: #FFFFFE; /* Background */
   --primary-btn: #007BFF; /* Primary button */
-  --text-color: #333333; /* Text color */
+  --text-color: #35333c; /* Text color */
 
   /* Secondary Colors */
   --secondary-btn: #6C757D; /* Secondary button */
-  --link-hover: #28A745; /* Hover effect for links/buttons */
 
   /* Accent Colors */
   --alert-color: #DC3545; /* Error color */
   --success-color: #28A745; /* Success color */
-
-  /* Backgrounds & Borders */
-  --card-bg: #FFFFFF; /* Card background */
-  --border-color: #E2E6EA; /* Border color */
 
   /* Text Highlighting */
   --highlight-color: #FF6347; /* Highlighted text */

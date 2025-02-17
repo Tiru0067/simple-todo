@@ -1,5 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
+
 import "./index.css";
 import TodoHeader from "../TodoHeader";
 import TodoList from "../TodoList";
@@ -10,6 +12,7 @@ function TodoApp() {
   const [todoText, setTodoText] = useState("");
   const [loading, setLoading] = useState(true);
   const [showTodoForm, setShowTodoForm] = useState(false);
+  const [editingTodo, setEditingTodo] = useState(null);
 
   const url = "https://simple-todo-8fnj.onrender.com/todos";
 
@@ -44,8 +47,14 @@ function TodoApp() {
   };
 
   const handleAddTodo = async (text) => {
-    const newTodo = { text };
+    const newTodo = {
+      id: uuidv4(),
+      title: text,
+      completed: false,
+    };
     setTodos((prevTodos) => [...prevTodos, newTodo]);
+    setShowTodoForm(false);
+    setTodoText("");
 
     await fetch(url, {
       method: "POST",
@@ -54,23 +63,37 @@ function TodoApp() {
     });
   };
 
-  // const handleEditTodo = async (text, id) => {
-  //   const updatedTodos = todos.map((todo) =>
-  //     todo.id === id ? { ...todo, text } : todo
-  //   );
-  //   setTodos(updatedTodos);
+  const handleEditTodo = async (text, id) => {
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, title: text } : todo
+    );
+    setTodos(updatedTodos);
 
-  //   await fetch(`${url}/${id}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({
-  //       ...updatedTodos.find((todo) => todo.id === id),
-  //       text,
-  //     }),
-  //   });
+    await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ title: text }),
+    });
 
-  //   setText(null);
-  // };
+    setTodoText("");
+    setShowTodoForm(false);
+  };
+
+  const handleToggleComplete = async (id) => {
+    const todoToUpdate = todos.find((todo) => todo.id === id);
+    const newCompletedValue = todoToUpdate.completed ? 0 : 1;
+
+    const updatedTodos = todos.map((todo) =>
+      todo.id === id ? { ...todo, completed: newCompletedValue } : todo
+    );
+    setTodos(updatedTodos);
+
+    await fetch(`${url}/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ completed: newCompletedValue }),
+    });
+  };
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
@@ -95,6 +118,10 @@ function TodoApp() {
           setShowTodoForm={setShowTodoForm}
           todoText={todoText}
           setTodoText={setTodoText}
+          handleEditTodo={handleEditTodo}
+          editingTodo={editingTodo}
+          setEditingTodo={setEditingTodo}
+          handleToggleComplete={handleToggleComplete}
         />
       </main>
     </div>
