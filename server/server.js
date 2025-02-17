@@ -31,7 +31,7 @@ const initializeDbServer = async () => {
     await db.run(createTableQuery);
 
     const PORT = process.env.PORT || 3000;
-    app.listen(3000, () =>
+    app.listen(PORT, () =>
       console.log(`Server started at http://localhost:${PORT}`)
     );
   } catch (err) {
@@ -61,7 +61,9 @@ const convertKeysToCamelCase = (obj) => {
 
 app.get("/todos", async (req, res) => {
   try {
-    const todos = await db.all("SELECT * FROM todo");
+    const todos = await db.all(
+      "SELECT * FROM todo ORDER BY completed ASC, id ASC"
+    );
     res.status(200).send(todos.map((todo) => convertKeysToCamelCase(todo)));
   } catch (err) {
     res.status(400).send(err.message);
