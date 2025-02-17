@@ -21,16 +21,15 @@ const initializeDbServer = async () => {
 
     // Create "todo" table if not exists
     const createTableQuery = `CREATE TABLE IF NOT EXISTS todo (
-         id INTEGER PRIMARY KEY AUTOINCREMENT,
+         id TEXT PRIMARY KEY,
          title TEXT NOT NULL, 
-         description TEXT, 
-         completed BOOLEAN DEFAULT 0, 
+         completed BOOLEAN DEFAULT FALSE,
          created_at DATETIME DEFAULT CURRENT_TIMESTAMP
        );
       `;
     await db.run(createTableQuery);
 
-    const PORT = process.env.PORT || 3000;
+    const PORT = process.env.PORT || 4000;
     app.listen(PORT, () =>
       console.log(`Server started at http://localhost:${PORT}`)
     );
@@ -83,6 +82,10 @@ app.get("/todos/:todoId", async (req, res) => {
 app.post("/todos", async (req, res) => {
   try {
     const newTodo = req.body;
+    if (!newTodo.id) {
+      return res.status(400).send("Id is required");
+    }
+
     if (!newTodo.title) {
       return res.status(400).send("Title is required");
     }

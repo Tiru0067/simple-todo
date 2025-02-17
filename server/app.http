@@ -4,12 +4,12 @@ GET http://localhost:4000/todos
 GET http://localhost:4000/todos/5
 ###
 
-POST http://localhost:3000/todos
+POST http://localhost:4000/todos
 Content-Type: application/json
 
 {
-  "title": "Backup files",
-  "description": "Save important documents and code to an external drive or cloud storage."
+  "id": 1,
+  "title": "Backup files"
 }
 ###
 

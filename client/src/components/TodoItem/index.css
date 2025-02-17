@@ -1,14 +1,19 @@
 .todo-item {
-    padding: 10px 20px;
+    padding: 8px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 5px;
+    border-radius: 6px;
+}
+
+.todo-item.done {
+    background-color: #eee;
 }
 
 @media (max-width: 768px) {
     .todo-item {
-        padding: 10px 0px;
+        padding: 8px 10px;
     }    
 }
 
@@ -41,7 +46,25 @@
     color: var(--secondary-btn);
 }
 
-.todo-item__menu-btn {
-    font-size: 1rem;
-    color: var(--secondary-btn)
+.todo-item__buttons-container {
+    display: flex;
+    align-items: center;
+    gap:  20px
+}
+
+.todo-item__buttons-container button {
+    border: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #aaaaaa
+}
+
+.todo-item__edit-btn:hover {
+    color: #000;
+}
+
+.todo-item__delete-btn:hover {
+    color: var(--highlight-color);
 }

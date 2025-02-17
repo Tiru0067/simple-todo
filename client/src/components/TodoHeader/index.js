@@ -9,7 +9,7 @@ import "./index.css";
 import SearchForm from "../SearchForum";
 import WindowContext from "../../context/windowContext";
 
-function TodoHeader({ toggleCheckbox, isChecked }) {
+function TodoHeader({ toggleCheckbox, isChecked, setShowTodoForm }) {
   const [showSearchBar, setShowSearchbar] = useState(false);
 
   const { width } = WindowContext();
@@ -21,7 +21,11 @@ function TodoHeader({ toggleCheckbox, isChecked }) {
   return (
     <header className="todo-header-wrapper">
       <div className="todo-header">
-        <button className="todo-header__add-todo-button">
+        <button
+          className="todo-header__add-todo-button"
+          type="button"
+          onClick={() => setShowTodoForm(true)}
+        >
           <IoIosAdd className="add-todo-button__icon" />
           <span className="add-todo-button__text">Add Todo</span>
         </button>
@@ -38,6 +42,7 @@ function TodoHeader({ toggleCheckbox, isChecked }) {
           </div>
           <div className="todo-header__hide-completed-section">
             <button
+              type="button"
               onClick={toggleCheckbox}
               className={`hide-completed-section__checkbox-btn ${
                 isChecked ? "checked" : ""
